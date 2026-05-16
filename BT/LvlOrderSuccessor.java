@@ -4,33 +4,53 @@ import java.util.*;
 
 public class LvlOrderSuccessor {
     public TreeNode levelOrder(TreeNode root, int target) {
-        TreeNode result = root;
         if (root == null) {
-            return result;
+            return null;
         }
 
-        Queue<TreeNode> levelNodes = new LinkedList<>();
-        levelNodes.offer(root);
-        int num = root.val;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
 
-        while (!levelNodes.isEmpty()) {
-            int levelSize = levelNodes.size();
-
-            for (int i = 0; i < levelSize; i++) {
-                TreeNode currTreeNode = levelNodes.poll();
-                num = currTreeNode.val;
-                if (currTreeNode.left != null) {
-                    levelNodes.offer(currTreeNode.left);
-                }
-
-                if (currTreeNode.right != null) {
-                    levelNodes.offer(currTreeNode.right);
-                }
+        while (!queue.isEmpty()) {
+            TreeNode currTreeNode = queue.poll();
+            if (currTreeNode.left != null) {
+                queue.offer(currTreeNode.left);
             }
 
+            if (currTreeNode.right != null) {
+                queue.offer(currTreeNode.right);
+            }
+
+            if (currTreeNode.val == target) {
+                break;
+            }
         }
-        if (num == target) {
-        }
-        return result;
+        return queue.peek();
+
+    }
+
+    public static void main(String[] args) {
+
+        /*
+         * 1
+         * / \
+         * 2 3
+         * / \ /
+         * 4 5 6
+         */
+
+        TreeNode root = new TreeNode(1);
+
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+
+        root.right.left = new TreeNode(6);
+
+        LvlOrderSuccessor l1 = new LvlOrderSuccessor();
+        System.out.println(l1.levelOrder(root, 2).val);
+
     }
 }

@@ -1,4 +1,4 @@
-package BT;
+package DSA.BT;
 
 import java.util.*;
 
