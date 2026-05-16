@@ -1,4 +1,4 @@
-package BT;
+package DSA.BT;
 
 import java.util.*;
 
@@ -25,10 +25,6 @@ public class LvlOrderSuccessor {
 
                 if (currTreeNode.right != null) {
                     levelNodes.offer(currTreeNode.right);
-                }
-
-                if (num == target) {
-                    break;
                 }
             }
 
